@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { v4 as uuidv4 } from 'uuid';
+
 import DataContext from './DataContext'
 import course1 from '../../img/kh1.jpg'
 import course2 from '../../img/kh2.jpg'
@@ -14,7 +16,7 @@ class DataProvider extends Component {
        
         products: [
             {
-                _id: 1,
+                _id: uuidv4(),
                 img: course1,
                 alt: 'Course',
                 title: 'Samsung Galaxy Note 20 Ultra - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -30,7 +32,7 @@ class DataProvider extends Component {
         
             },
             {
-                _id: 2,
+                _id: uuidv4(),
                 img: course2,
                 alt: 'Course',
                 title: 'iPhone 12 128GB - 4GB, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -46,7 +48,7 @@ class DataProvider extends Component {
         
             },
             {
-                _id: 3,
+                _id: uuidv4(),
                 img: course3,
                 alt: 'Course',
                 title: 'Xiaomi Mi 11 5G - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -62,7 +64,7 @@ class DataProvider extends Component {
         
             },
             {
-                _id: 4,
+                _id: uuidv4(),
                 img: course4,
                 alt: 'Course',
                 title: 'Vivo X60 Pro 5G - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -77,7 +79,7 @@ class DataProvider extends Component {
                 unStars: 1
             },
             {
-                _id: 5,
+                _id: uuidv4(),
                 img: course5,
                 alt: 'Course',
                 title: 'OnePlus Nord 5G - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -92,7 +94,7 @@ class DataProvider extends Component {
                 unStars: 3
             },
             {
-                _id: 6,
+                _id: uuidv4(),
                 img: course6,
                 alt: 'Course',
                 title: 'OPPO Reno4 Pro - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -107,7 +109,7 @@ class DataProvider extends Component {
                 unStars: 2
             },
             {
-                _id: 7,
+                _id: uuidv4(),
                 img: course7,
                 alt: 'Course',
                 title: 'Realme 7 Pro - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
@@ -122,7 +124,7 @@ class DataProvider extends Component {
                 unStars: 2
             },
             {
-                _id: 8,
+                _id: uuidv4(),
                 img: course8,
                 alt: 'Course',
                 title: 'Vsmart Aris Pro - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
