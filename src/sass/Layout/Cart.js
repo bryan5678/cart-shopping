@@ -8,14 +8,53 @@ class Cart extends Component {
     // componentDidMount(){
     //     this.context.updateTotal()
     // }
+   
+
+    shouldComponentUpdate(){
+        console.log("Cart shouldComponentUpdate")
+
+    }
+    componentDidUpdate(){
+        console.log("Cart componentDidUpdate")
+        // console.log(unique)
+        // localStorage.setItem('dataTotal', JSON.stringify(this.state.total))
+        // const {cart} = this.context;
+        // localStorage.setItem('dataCart', JSON.stringify(cart))
+
+    };
+
+    componentDidMount(){
+        console.log("Cart componentDidMount")
+        
+        // const dataCart = JSON.parse(localStorage.getItem('dataCart'));
+        // if(dataCart !== null){
+        //     this.setState({cart: dataCart}
+        //     ,()=> console.log(this.state.cart)
+        //     )
+        // }
+        // const dataTotal = JSON.parse(localStorage.getItem('dataTotal'));
+        // if(dataTotal !== null){
+        //     this.setState({total: dataTotal});
+        // }
+    }
+
+    componentWillUnmount(){
+        console.log("Cart componentWillUnmount")
+        // console.log(this.state.cart)
+        
+    }
+    
+
     render() {
-        const { cart, addCart, reduceCart, removeCart} = this.context;
+        const {cart, addCart, reduceCart, removeCart} = this.context;
         let unique = [...new Set(cart)];
+      
+
         // let duplicates = unique.map(item => cart.filter(str => str === item).length);
         let duplicates = unique.map(item => [item._id, cart.filter(str => str === item).length]);
         let duplicatesTotal = unique.map(item => cart.filter(str => str === item).length * item.newPrice);
 
-        // console.log(duplicatesTotal)
+        // console.log(unique)
         let obj = Object.fromEntries(duplicates)
         // let objTotal = Object.fromEntries(duplicatesTotal)
         let total1 = duplicatesTotal.reduce((prev, item)=>{
@@ -38,13 +77,10 @@ class Cart extends Component {
                             </Col>
                             <Col sm={6} md={3}>
                                 <Card.Img className="px-4 py-3" variant="top" src={item.img} alt={item.alt}/>
-
-                                {/* <Card.Text className="">{item.img}</Card.Text>    */}
                             </Col>
                             <Col sm={3} md={1}>
                                 <Card.Text className="d-flex justify-content-center f-15">${item.newPrice}</Card.Text>   
                             </Col>
-                            
                             <Col sm={3} md={2} className="d-flex justify-content-md-between justify-content-center align-items-center my-3">
                                 <Button size="md" variant="primary" onClick={()=> reduceCart(item._id)}>-</Button>
                                 <span className="mx-3">

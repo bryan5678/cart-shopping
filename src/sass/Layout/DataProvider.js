@@ -12,8 +12,7 @@ import course7 from '../../img/kh7.jpg'
 import course8 from '../../img/kh8.jpg'
 
 class DataProvider extends Component {
-    state={
-       
+    state={    
         products: [
             {
                 _id: uuidv4(),
@@ -127,7 +126,7 @@ class DataProvider extends Component {
                 _id: uuidv4(),
                 img: course8,
                 alt: 'Course',
-                title: 'Vsmart Aris Pro - 128Gb, Khuyến mãi khủng. Duy nhất hôm nay',
+                title: 'Vsmart Aris Pro - 128Gb, Khuyến mãi khủng long. Duy nhất hôm nay',
                 text: 'Vsmart',
                 des: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quo maiores voluptatem exercitationem consequatur soluta eius eligendi accusantium molestias repellendus. Animi facere eligendi earum! Veniam iste corporis eveniet quasi sapiente ea doloribus fugiat sequi ad quod dolorum quis ab, distinctio assumenda rerum beatae minus nulla, ratione, iusto exercitationem blanditiis asperiores.',
                 score: 4.7,
@@ -148,24 +147,22 @@ class DataProvider extends Component {
             return product._id === id
         })
         const updatedCart = [...cart,...data].sort((a,b)=>{
-            return a._id - b._id
+            if (a._id > b._id) {
+                return 1;
+              }
+              if (a._id < b._id) {
+                return -1;
+              }
+              return 0;
         })
-        
-
-        // const updatedCount = updatedCart.filter(product =>{
-        //     return product._id == id
-        // }).length
-
-        // const updatedCountIndex = products.findIndex(product =>{
-        //     return product._id == id
-        // })
-
-        // const totalArr = products[updatedCountIndex].price * updatedCount
 
 
         this.setState(
             {   cart: updatedCart}
+            // ,()=> console.log(cart)
+
         )
+
         
 
     }
@@ -183,14 +180,14 @@ class DataProvider extends Component {
             cart.splice(productsIndex, 1) 
             this.setState(
                 {   cart: [...cart]}
-                // ,()=> console.log(this.state.products)
+                // ,()=> console.log(this.state.cart)
                 )   
         }if(updatedCount!==1){
             const productsIndex = cart.findIndex(item => item._id === id)
             cart.splice(productsIndex, 1) 
             this.setState(
                 {   cart: [...cart]}
-                // ,()=> console.log(this.state.products)
+                // ,()=> console.log(this.state.cart)
                 )   
         }
             
@@ -208,49 +205,39 @@ class DataProvider extends Component {
                 return item._id === id
             })
             cart.splice(cartItemIndex, cartItemRemove.length) 
-            // const updatedCount = cart.filter(product =>{
-            //     return product._id === id
-            // }).length
-            // console.log(updatedCount)
             this.setState(
                 {cart: [...cart]}
+                // ,()=> console.log(this.state.cart)
+
             )
         }   
     }
 
-    updateTotal = () =>{
-        const {cart} = this.state;
 
-        // let unique = [...new Set(cart)];
-        // let duplicates = unique.map(item => cart.filter(str => str === item).length);
-        // let duplicates = unique.map(item => [item._id, cart.filter(str => str === item).length]);
-        // console.log(duplicates)
-        // let obj = Object.fromEntries(duplicates)
+    componentDidUpdate(){
+        console.log("DataProvider componentDidUpdate")
+       
+    };
 
-        const upTotal = cart.reduce((prev, item)=>{
-            return prev + (item.price * item.count)
-        },0)
-        
-        this.setState(
-            {total: upTotal}
-            ,()=> console.log(this.state.total)
-            )
-
-          
-        // this.setState({
-        //     products: products.map(
-        //       product => product._id === id? { ...product, count: countChanging }: product
-        //     )       
-        //   },()=> console.log(this.state.products))
+    componentDidMount(){
+        console.log("DataProvider componentDidMount")
+        localStorage.removeItem('dataProduct')
+       
     }
+
+    componentWillUnmount(){
+        console.log("DataProvider componentWillUnmount")        
+    }
+
+  
 
 
     render() {
-        const {products, cart, total} = this.state;
+        const {  products, cart} = this.state;
         const {addCart, reduceCart, removeCart} = this;
 
         return (
-            <DataContext.Provider value={{products, cart, total, addCart, reduceCart, removeCart}} >
+            <DataContext.Provider value={{ products, cart, addCart, reduceCart, removeCart}} >
                 {this.props.children}
             </DataContext.Provider>
         )

@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Container, Row, Col, Card, Button } from 'react-bootstrap'
-import { Link} from 'react-router-dom'
-import DataContext from './DataContext'
+import React, { Component } from 'react';
+import { Button, Card, Col, Container, Row } from 'react-bootstrap';
 import { FaRegStar, FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import DataContext from './DataContext';
 
 class Detail extends Component {
     static contextType = DataContext;
@@ -12,19 +12,45 @@ class Detail extends Component {
 
     getProduct = () =>{
         if(this.props.match.params.id){
-            const res = this.context.products;
+            const {products} = this.context
+            // const res = this.context.products;
             const id = this.props.match.params.id
 
-            const data = res.filter(item =>{
+            const data = products.filter(item =>{
                 return item._id === id 
             })
-            this.setState({product: data})
+            this.setState({product: [...data]},
+            ()=>console.log(this.state.product)
+            )
         }
     };
 
     componentDidMount(){
         this.getProduct();
+        console.log("Details componentDidMount")
+        
+        const dataProduct = JSON.parse(localStorage.getItem('dataProduct'));
+        if(dataProduct !== null){
+            this.setState({product: dataProduct}
+            ,()=> console.log(this.state.product)
+            )
+        }
+
     }
+    componentDidUpdate(){
+        console.log("Details componentDidUpdate")
+        const {product} = this.state;
+        localStorage.setItem('dataProduct', JSON.stringify(product))
+
+    };
+
+    componentWillUnmount(){
+        console.log("Details componentWillUnmount")
+        // console.log(this.state.cart)
+        localStorage.removeItem('dataProduct')
+    }
+
+    
 
     render() {
         const {product} = this.state;
@@ -32,11 +58,12 @@ class Detail extends Component {
             <Container>
                 <h1 className="app">Product details</h1>
                 <p className="app">{this.props.match.url}</p>
+
                 <Row className="mt-5">
                     {
-                        product.map((item, index) =>{
+                        product.map((item) =>{
                             return(
-                            <Col sm={12} key={index}>
+                            <Col sm={12} key={item._id}>
                                 <Card className="card--courses mb-3">
                                     {/* <NavLink className="no-underline" to={`${this.props.match.url}/${item._id}`}> */}
                                     <Row>

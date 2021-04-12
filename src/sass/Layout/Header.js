@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Nav, Navbar } from 'react-bootstrap';
-import {Route, NavLink} from 'react-router-dom'
+import {Route, NavLink, Link} from 'react-router-dom'
 import {FaShoppingCart} from 'react-icons/fa'
 import DataContext from './DataContext'
 
@@ -70,7 +70,8 @@ const MenuItems=  ({label, to, activeOnlyWhenExact})=>{
             <Navbar bg="light" expand="md" className="py-0">
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-              <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+              <Navbar.Brand as="div"><Link className="no-underline" to="/">React-Bootstrap</Link></Navbar.Brand>
+                  
 
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto relative" as="ul">

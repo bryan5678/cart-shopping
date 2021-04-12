@@ -8,6 +8,20 @@ import DataContext from './DataContext'
 export class Product extends Component {
     static contextType = DataContext
 
+    componentDidUpdate(){
+        console.log("Product componentDidUpdate")
+       
+    };
+
+    componentDidMount(){
+        console.log("Product componentDidMount")
+    }
+
+    componentWillUnmount(){
+        console.log("Product componentWillUnmount")
+        // console.log(this.state.cart)
+        
+    }
     render() {
         const {products} = this.context
 
